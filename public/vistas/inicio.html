@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio | Sportswear Dashboard</title>
+  <link rel="stylesheet" href="../estilo-inicio.css">
+</head>
+<body>
+  <div class="contenedor-login">
+    <h1>Sportswear Dashboard</h1>
+    <form id="formLogin">
+      <label for="usuario">Ingresá tu nombre:</label>
+      <input type="text" id="usuario" name="usuario" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("formLogin").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("usuario").value;
+      localStorage.setItem("usuario", nombre);
+      window.location.href = ""; // página principal
+    });
+  </script>
+</body>
+</html>
