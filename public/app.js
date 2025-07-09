@@ -8,7 +8,7 @@ let acumuladorTotal = document.querySelector(".precio-total"); // Contenedor del
 const btnVaciar = document.querySelector(".btn-vaciar"); // Botón para vaciar el carrito
 const barraBusqueda = document.querySelector(".barra-busqueda"); // Barra de búsqueda para filtrar productos
 const btnCategoria = document.querySelectorAll(".btn-categoria"); // Botón para filtrar por categoría. querySelectorAll devuelve una lista con todos los elementos que coinciden con .btn-categoria en este caso
-
+const botonModoOscuro = document.querySelector(".modo-oscuro"); // Botón para cambiar a modo oscuro
 
 
 /* Funcion para imprimir nombre de alumnos en header */
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             productoSeleccionado.cantidad = 1;
             carrito.push(productoSeleccionado); // Si no está en el carrito, lo agrega
+            document.getElementById("acumulador-prods").innerText = carrito.length;
         };
 
         console.log(carrito);
@@ -172,12 +173,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     }
 
+    // Modo oscuro 
+    // comprobar si hay una preferencia guardada
+    const modoGuardado = localStorage.getItem("modoOscuro");
+    if (modoGuardado === "true") {
+        document.body.classList.add("dark-mode");
+    } else {
+        // siempre arranca en modo claro
+        document.body.classList.remove("dark-mode");
+    }
 
-    fetchProductos('http://localhost:3000/productos');
+    fetchProductos('http://localhost:3000/api/productos');
     mostrarCarrito(carrito);
 });
 
 
+
+// cuando se haga click, alternar modo y guardar
+botonModoOscuro.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    const estaOscuro = document.body.classList.contains("dark-mode");
+    localStorage.setItem("modoOscuro", estaOscuro);
+});
 
 function init() {
     imprimirDatosAlumnos(); 
