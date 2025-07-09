@@ -12,18 +12,25 @@
     <form id="formLogin">
       <label for="usuario">Ingresá tu nombre:</label>
       <input type="text" id="usuario" name="usuario" required>
-      <button type="submit">Entrar</button>
-      <button type="submit" class="administrador">Entrar como administrador</button>
+      <button type="submit" id="autoservicio">Entrar</button>
+      <button type="submit" id="administrador">Entrar como administrador</button>
     </form>
   </div>
 
   <script>
-    document.getElementById("formLogin").addEventListener("submit", function(e) {
+    document.getElementById("autoservicio").addEventListener("click", function(e) {
       e.preventDefault();
       const nombre = document.getElementById("usuario").value;
       localStorage.setItem("usuario", nombre);
-      window.location.href = ""; // página principal
+      window.location.href = "ecommerce.html"; // página principal
     });
+
+    document.getElementById("administrador").addEventListener("click", function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("usuario").value;
+      localStorage.setItem("usuario", nombre);
+      window.location.href = "http://localhost:3000/dashboard"; // página de administración
+    })
   </script>
 </body>
 </html>

@@ -9,7 +9,7 @@ const btnVaciar = document.querySelector(".btn-vaciar"); // Botón para vaciar e
 const barraBusqueda = document.querySelector(".barra-busqueda"); // Barra de búsqueda para filtrar productos
 const btnCategoria = document.querySelectorAll(".btn-categoria"); // Botón para filtrar por categoría. querySelectorAll devuelve una lista con todos los elementos que coinciden con .btn-categoria en este caso
 const botonModoOscuro = document.querySelector(".modo-oscuro"); // Botón para cambiar a modo oscuro
-
+//const nombreUsuario = document.querySelector("#usuario");
 
 /* Funcion para imprimir nombre de alumnos en header */
 function imprimirDatosAlumnos(){
@@ -182,6 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // siempre arranca en modo claro
         document.body.classList.remove("dark-mode");
     }
+
+    document.querySelector(".btn-comprar").addEventListener("click", () => {
+        const nombreUsuario = localStorage.getItem("usuario"); // agarra el nombre del usuario del localStorage
+        console.log(`Compra realizada por ${nombreUsuario}. Productos: ${JSON.stringify(carrito)}`);
+        alert("Compra realizada con éxito. Gracias por su compra!");
+        carrito.length = 0; // Vacía el carrito después de la compra
+        localStorage.removeItem('carrito'); // Elimina el carrito del localStorage
+        mostrarCarrito(carrito); // Muestra el carrito vacío
+    });
 
     fetchProductos('http://localhost:3000/api/productos');
     mostrarCarrito(carrito);
